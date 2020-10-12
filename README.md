@@ -1,4 +1,4 @@
-# OT-RFC-repository
+# OT RFC Repository
 
 
 OriginTrail Requests For Comments (RFCs) present system development and improvement proposals describing the network operation, protocol specifications, related APIs and relevant ecosystem components. It is a public, open for contribution repository for the OriginTrail community.
