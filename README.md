@@ -16,8 +16,13 @@ Detailed contribution guidelines are TBA
 ### Useful links
 
 
-[OriginTrail website](https://origintrail.io) 
-[OriginTrail documentation page](http://docs.origintrail.io) 
-[OriginTrail Discord Group](https://discordapp.com/invite/FCgYk2S) 
-[OriginTrail Telegram Group](https://t.me/origintrail) 
-[OriginTrail Twitter](https://twitter.com/origin_trail) 
+[OriginTrail website](https://origintrail.io)
+
+[OriginTrail documentation page](http://docs.origintrail.io)
+
+[OriginTrail Discord Group](https://discordapp.com/invite/FCgYk2S)
+
+[OriginTrail Telegram Group](https://t.me/origintrail)
+
+[OriginTrail Twitter](https://twitter.com/origin_trail)
+
