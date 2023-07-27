@@ -70,6 +70,7 @@ In accordance with discussions from OT-RFC-12 and Polkadot ecosystem development
 
 As part of phase 3, we envision to further enhance the user experience by providing an easy bridging UI that will perform the bridging and conversion of TRAC to the XC20 TRAC usable in the DKG.
 
+Phasing out the teleport system will also follow a TRAC teleport reconciliation process, by bridging all the teleported TRAC tokens (locked on Ethereum in teleport smart contracts) through BridgeHub to establish a 1-1 relationship between XC20 TRAC and BridgeHub TRAC. After all teleported TRAC from Ethereum side is locked in BridgeHub smart contracts, the BridgeHub adapter will be initialized and enable 1-1 conversions in both directions.
 
 ## Conclusion
 
