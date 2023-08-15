@@ -1,0 +1,20 @@
+{
+  "name": "Optimism",
+  "website": "https://optimism.io/",
+  "twitter": "@optimismFND",
+  "network_id": "10",
+  "block_explorer": "https://optimistic.etherscan.io/", 
+  "rpc": "https://optimism-mainnet.infura.io",
+  "trac_bridge": {
+      "source": {
+          "name": "Ethereum",
+          "address": "0x3154Cf16ccdb4C6d922629664174b904d80F2C35",
+          "trac_address": "0xaa7a9ca87d3694b5755f213b5d04094b8d0f0a6f"
+      },
+      "destination": {
+          "name": "Optimism",
+          "bridge_address": "0x4200000000000000000000000000000000000010",
+          "trac_address": "0xA81a52B4dda010896cDd386C7fBdc5CDc835ba23"
+      }
+  }
+}
