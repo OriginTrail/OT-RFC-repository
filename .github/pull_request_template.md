@@ -15,6 +15,6 @@ Please delete options that are not relevant.
 
 - [ ] I have read OT-RFC-17.
 - [ ] PR has name in format `RFC-17-CHAIN_NAME_integration`.
-- [ ] I have created a json with name `CHAIN_NAME.json` in directory `RFCs/OT-RFC-17-OriginTrail-integration-with-EVM-compatible-blockchains/chains/integration-request`.
+- [ ] I have created a json file with name `CHAIN_NAME.json` in directory `RFCs/OT-RFC-17-OriginTrail-integration-with-EVM-compatible-blockchains/chains/integration-requests`.
 - [ ] I have added chain name, network ID, block explorer, rpc endpoint, twitter and website to `CHAIN_NAME.json`.
-- [ ] I have created trac bridge object inside of json with source and destination informations.
+- [ ] I have created TRAC bridge object inside of json with source and destination informations.
