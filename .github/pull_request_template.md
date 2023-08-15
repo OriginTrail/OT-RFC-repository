@@ -13,7 +13,7 @@ Please delete options that are not relevant.
 
 # New blockchain integration checklist:
 
-- [ ] I have read OT-RFC-17.
+- [ ] I have read [OT-RFC-17](../RFCs/OT-RFC-17-OriginTrail-integration-with-EVM-compatible-blockchains/README.md).
 - [ ] PR has name in format `RFC-17-CHAIN_NAME_integration`.
 - [ ] I have created a json file with name `CHAIN_NAME.json` in directory `RFCs/OT-RFC-17-OriginTrail-integration-with-EVM-compatible-blockchains/chains/integration-requests`.
 - [ ] I have added chain name, network ID, block explorer, rpc endpoint, twitter and website to `CHAIN_NAME.json`.
