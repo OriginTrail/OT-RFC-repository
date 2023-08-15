@@ -1,0 +1,9 @@
+{
+    "name": "Examplec chain name",
+    "network_id": "123456",
+    "website": "https://examplechain.com/",
+    "block_explorer": "https://explorer.examplechain.com/",
+    "rpc": "https://rpc.examplechain.com/",
+    "trac_bridge_eth": "0x1bec79549c8bbd61ffc14a3662944748fc99cbcf",
+    "trac_bridge_destination_chain": "0x13979640cd8d2a79f52a11e9882a5b75643efd10"
+}
