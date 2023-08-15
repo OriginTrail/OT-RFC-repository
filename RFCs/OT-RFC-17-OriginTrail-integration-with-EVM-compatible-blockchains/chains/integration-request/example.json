@@ -1,9 +1,20 @@
 {
-    "name": "Examplec chain name",
+    "name": "Example chain name",
     "network_id": "123456",
-    "website": "https://examplechain.com/",
     "block_explorer": "https://explorer.examplechain.com/",
     "rpc": "https://rpc.examplechain.com/",
-    "trac_bridge_eth": "0x1bec79549c8bbd61ffc14a3662944748fc99cbcf",
-    "trac_bridge_destination_chain": "0x13979640cd8d2a79f52a11e9882a5b75643efd10"
+    "website": "https://examplechain.com/",
+    "twitter": "@example_chain",
+    "trac_bridge": {
+        "source": {
+            "name": "Ethereum",
+            "address": "0x1bec79549c8bbd61ffc14a3662944748fc99cbcf",
+            "trac_address": "0xaA7a9CA87d3694B5755f213B5D04094b8d0F0A6F"
+        },
+        "destination": {
+            "name": "Example chain name",
+            "bridge_address": "0x13979640cd8d2a79f52a11e9882a5b75643efd10",
+            "trac_address": "0x29449640cd8d2b79f52a1ce9882a5b7a643efd10"
+        }
+    }
 }
