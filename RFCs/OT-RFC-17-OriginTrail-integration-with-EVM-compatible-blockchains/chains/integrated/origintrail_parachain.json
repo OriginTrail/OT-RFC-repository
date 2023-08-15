@@ -2,7 +2,17 @@
     "name": "OriginTrail Parachain",
     "network_id": "2043",
     "website": "https://parachain.origintrail.io/",
+    "twitter": "@ot_parachain",
     "block_explorer": "https://origintrail.subscan.io/",
-    "trac_bridge_eth": "",
-    "trac_bridge_destination_chain": "0xFfFFFFff00000000000000000000000000000001"
+    "rpc": "https://astrosat-parachain-rpc.origin-trail.network/",
+    "trac_bridge": {
+        "source": {
+            "name": "Ethereum",
+            "trac_address": "0xaA7a9CA87d3694B5755f213B5D04094b8d0F0A6F"
+        },
+        "destination": {
+            "name": "OriginTrail Parachain",
+            "trac_address": "0xFfFFFFff00000000000000000000000000000001"
+        }
+    }
 }
