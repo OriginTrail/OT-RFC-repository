@@ -1,0 +1,8 @@
+{
+    "name": "OriginTrail Parachain",
+    "network_id": "2043",
+    "website": "https://parachain.origintrail.io/",
+    "block_explorer": "https://origintrail.subscan.io/",
+    "trac_bridge_eth": "",
+    "trac_bridge_destination_chain": "0xFfFFFFff00000000000000000000000000000001"
+}
