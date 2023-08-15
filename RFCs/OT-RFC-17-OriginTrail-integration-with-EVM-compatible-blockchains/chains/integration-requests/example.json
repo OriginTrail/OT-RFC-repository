@@ -1,10 +1,10 @@
 {
     "name": "Example chain name",
+    "website": "https://examplechain.com/",
+    "twitter": "@example_chain",
     "network_id": "123456",
     "block_explorer": "https://explorer.examplechain.com/",
     "rpc": "https://rpc.examplechain.com/",
-    "website": "https://examplechain.com/",
-    "twitter": "@example_chain",
     "trac_bridge": {
         "source": {
             "name": "Ethereum",
