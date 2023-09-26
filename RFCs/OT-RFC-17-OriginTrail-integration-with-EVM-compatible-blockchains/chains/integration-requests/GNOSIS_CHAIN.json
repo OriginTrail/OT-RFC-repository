@@ -12,7 +12,7 @@
             "trac_address": "0xaA7a9CA87d3694B5755f213B5D04094b8d0F0A6F"
         },
         "destination": {
-            "name": "Ethereum",
+            "name": "Gnosis",
             "bridge_address": "0xf6A78083ca3e2a662D6dd1703c939c8aCE2e268d",
             "trac_address": "0xEddd81E0792E764501AaE206EB432399a0268DB5"
         }
