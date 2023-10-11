@@ -49,8 +49,17 @@ The goal of this phase is to enable safe movement of TRAC tokens between OriginT
 
 Any TRAC being teleported back to Ethereum would be unlocked from the appropriate smart contracts while being “burned” on the OriginTrail Parachain XC20 TRAC Asset pallet to maintain consistency. Given the cumbersome nature of the teleportation system, the frequency of execution will be **set to once a month.** Furthermore, due to the complexities involved the intention is to phase out the teleportation system as soon as possible.
 
-**ETA for start of Phase 1: October 1, 2023**
+**ETA for start of Phase 1: October 2023**
 
+**October 11th update:**
+
+As the initial Teleport process has been established in the direction from “Ethereum to OriginTrail Parachain”, to enable a two way teleport an extension to the process is needed in the “OriginTrail Parachain to Ethereum” direction. As originally indicated in this RFC (v1 from July 2023) the process is to follow the same principles. Therefore the same components will be utilized:
+* Smart contracts: the system will use the same, unmodified smart contract as indicated in [OT-RFC-12](https://github.com/OriginTrail/OT-RFC-repository/blob/main/RFCs/OT-RFC-12%20OriginTrail%20Parachain%20TRAC%20bridges%20(v2).pdf), due to the contract being audited and battle tested on many occasions.
+* Token accounting: to ensure exact TRAC accounting between the two sides of  the teleport system, a symmetrical approach is taken. While teleporting from Ethereum to OriginTrail Parachain involved locking TRAC on Ethereum and minting XC20 TRAC on OriginTrail Parachain, the opposite direction (from OriginTrail Parachain to Ethereum) will entail burning XC20 TRAC on OriginTrail Parachain, unlocking the appropriate amount on Ethereum and sending to the right accounts.
+* Procedure safety: as previously done in the Teleport system, special care is to be taken to automate the process in such a way that minimizes potential of error and ensures verifiability of outcomes via both Ethereum and OriginTrail Parachain.
+
+The Teleport process in the direction between OriginTrail Parachain and Ethereum is illustrated in the sequence diagram below: ![](images/diagram.png "Teleport process in the OriginTrail Parachain to Ethereum directio")
+Figure 2: Teleport process in the OriginTrail Parachain to Ethereum direction
 
 ### Phase 2: Integrating available Polkadot bridges
 
@@ -63,6 +72,9 @@ It is implied that users of a bridge understand the security considerations of t
  \
 Phase 2 introduces a UX improvement over the Phase 1 teleportation system, however still implies multiple steps to bridge TRAC from Ethereum, which is to be addressed in Phase 3.
 
+**October 11th update:**
+
+Following the successful implementation of the XCM channel in between Moonbeam and OriginTrail Parachain, all available bridges on Moonbeam become available for utilization. More information on how to bridge OTP and TRAC to Moonbeam can be found [here](https://docs.origintrail.io/blockchain-layer-1/origintrail-parachain/bridging-to-moonbeam). 
 
 ### Phase 3: Integrating Polkadot common good bridges
 
