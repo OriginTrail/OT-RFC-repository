@@ -24,7 +24,7 @@ This RFC is used as information support for the upcoming referendum on OriginTra
 * Confirm the Knowledge Mining mechanics
 * Introduce the new naming for OriginTrail Parachain (token ticker OTP) to reflect its unique value proposition as an enabler for the verifiable web through decentralized Artificial Intelligence, becoming **NeuroWeb (token ticker NEURO)***
 
-* - No new token is being created, OTP tokens become Neuro tokens
+\* No new token is being created, OTP tokens become Neuro tokens
 
 ## Decentralized global intelligence: Synergy of blockchains and Decentralized Knowledge Graph
 
