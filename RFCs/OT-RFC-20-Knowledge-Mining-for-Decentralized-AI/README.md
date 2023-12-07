@@ -17,6 +17,7 @@ This RFC introduces knowledge growth incentives through a key innovation - **Kno
 
 
 ![ngi](images/ngi.png)
+
 _This project has received funding from the European Union’s Horizon Europe research and innovation programme via the NGI Search [grant agreement 101069364](https://urldefense.com/v3/__https://cordis.europa.eu/project/id/101069364__;!!D9dNQwwGXtA!W2TymOXKZfJknzduXKZepycFGpQKHCYE2taARqr71Z_4hUad5Z9nJ1iA0WXSsznErIrWwkS6l5ttaifbtFcALg$) and linked with the [Next Generation Internet Initiative](https://urldefense.com/v3/__https://ngi.eu__;!!D9dNQwwGXtA!W2TymOXKZfJknzduXKZepycFGpQKHCYE2taARqr71Z_4hUad5Z9nJ1iA0WXSsznErIrWwkS6l5ttaifkmkhTvg$)._
 
 This RFC is used as information support for the upcoming referendum on OriginTrail Parachain on Polkadot seeking to:
