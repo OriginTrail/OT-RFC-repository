@@ -5,6 +5,7 @@
     "twitter": "@ot_parachain",
     "block_explorer": "https://origintrail.subscan.io/",
     "rpc": "https://astrosat-parachain-rpc.origin-trail.network/",
+    "token_symbol": "otp",
     "trac_bridge": {
         "source": {
             "name": "Ethereum",
