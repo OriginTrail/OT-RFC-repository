@@ -5,6 +5,7 @@
     "network_id": "123456",
     "block_explorer": "https://explorer.examplechain.com/",
     "rpc": "https://rpc.examplechain.com/",
+    "token_symbol": "exm",
     "trac_bridge": {
         "source": {
             "name": "Ethereum",
