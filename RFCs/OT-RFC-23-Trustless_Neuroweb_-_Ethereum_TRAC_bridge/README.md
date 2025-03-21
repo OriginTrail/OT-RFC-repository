@@ -1,6 +1,6 @@
-**OT-RFC-23 Trustless NeuroWeb — Ethereum TRAC bridge**
+# OT-RFC-23 Trustless NeuroWeb — Ethereum TRAC bridge
 
-## Authors: OriginTrail Core Developers, team Snowfork
+**Authors: OriginTrail Core Developers, team Snowfork**
 
 **Date:** Mar 21, 2025
 
