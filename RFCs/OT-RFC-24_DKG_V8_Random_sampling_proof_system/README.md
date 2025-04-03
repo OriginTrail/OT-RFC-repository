@@ -14,7 +14,7 @@ Table of contents
 
 [Non-Functional Requirements (NFRs)](#non-functional-requirements-\(nfrs\))
 
-[Solution: Random sampling, a scalable proof-of-knowledge-based system](#solution:-random-sampling,-a-scalable-proof-of-knowledge-based-system)
+[Solution - Random sampling, a scalable proof-of-knowledge-based system](#solution-random-sampling)
 
 [Proof system sequence](#proof-system-sequence)
 
@@ -60,7 +60,7 @@ To properly address the above ambition for lower block space consumption and sca
 3. **NFR3 Core Node usability:** The random sampling system implementation should operate without necessary involvement from the node operator (the node operators are incentivized to focus on uptime, stake accrual, publishing, and managing node service ask, for the benefit of the entire network).  
 4. **NFR4 Reward collection before V8.1:** Nodes should be able to collect accumulated rewards before the V8.1 release.
 
-# Solution: Random sampling, a scalable proof-of-knowledge-based system {#solution:-random-sampling,-a-scalable-proof-of-knowledge-based-system}
+# Solution: Random sampling, a scalable proof-of-knowledge-based system {#solution-random-sampling}
 
 Random sampling is one implementation of a “Proof of Knowledge” (PoK), used as a key feature of the DKG to implement incentives for nodes to store Knowledge Assets and have high uptime. 
 
