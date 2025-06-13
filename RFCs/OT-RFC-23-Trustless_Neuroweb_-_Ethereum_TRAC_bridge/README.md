@@ -35,7 +35,7 @@ There are two broad scenarios for bridging TRAC from Ethereum to Polkadot:
 
 The optimal technical approach for supporting the two scenarios above, while maintaining the highest level of security, as well as optimal level of user and developer experience is presented in the figure below.
 
-![OT-RFC-23 Figure 1](https://github.com/OriginTrail/OT-RFC-repository/blob/ot-rfc-23/RFCs/OT-RFC-23-Trustless_Neuroweb_-_Ethereum_TRAC_bridge/ot-rfc-23-figure-1-updated.png?raw=true)
+![OT-RFC-23 Figure 1](./ot-rfc-23-figure-1-updated.png?raw=true)
 
 Figure 1: Bridging TRAC between Ethereum and Polkadot
 
