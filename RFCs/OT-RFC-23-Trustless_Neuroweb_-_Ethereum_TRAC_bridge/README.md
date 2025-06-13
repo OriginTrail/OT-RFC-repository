@@ -28,12 +28,12 @@ Bridging from Ethereum requires a small amount of ETH for Ethereum gas fees, whi
 
 **Update Jun 13 2025:** After thorough RFC review together with Polkadot & OriginTrail community, the following updated proposal is introduced.
 
-There are two broad scenarios for bridging TRAC from Ethereum to Polkadot:
+There are two broad use cases for bridging TRAC from Ethereum to Polkadot:
 
 1. Bridging TRAC for purpose of DKG utility (knowledge publishing, staking), which requires bridging TRAC to Neuroweb parachain
 2. Bridging TRAC for other purposes within the Polkadot ecosystem, such as trading and providing liquidity on Polkadot DEXes for example
 
-The optimal technical approach for supporting the two scenarios above, while maintaining the highest level of security, as well as optimal level of user and developer experience is presented in the figure below.
+The optimal technical approach for supporting the two use cases above, while maintaining the highest level of security, as well as optimal level of user and developer experience is presented in the figure below.
 
 ![OT-RFC-23 Figure 1](./ot-rfc-23-figure-1-updated.png?raw=true)
 
@@ -41,9 +41,9 @@ Figure 1: Bridging TRAC between Ethereum and Polkadot
 
 The key components of the system are Snowbridge, the Polkadot Asset Hub (PAH) and Neuroweb TRAC wrapper pallet. 
 
-**In case of Scenario 1**, the approach will entail a path through Snowbridge and Polkadot Asset Hub (PAH), finally using the Neuroweb TRAC wrapper pallet to reconcile the existing XC20 TRAC used for utility and the cannonical PAH TRAC at 1 to 1 parity. The wrapper pallet will effectively lock/unlock PAH TRAC on one side and mint/burn XC20 TRAC on the Neuroweb side, to be used for DKG utility (it just transforms the Snowbridge output token into an equal number of TRAC on NeuroWeb and vice versa). Introducing the TRAC wrapper pallet will further enhance the security of the entire system as the TRAC wrapper pallet, which is governed by the robust NeuroWeb Governance and secured by Polkadot, willhave minting and burning privileges over the XC20 TRAC asset (currently in control by OriginTrail Core Developers for Teleport purposes).
+**For use case 1**, the approach will entail a path through Snowbridge and Polkadot Asset Hub (PAH), finally using the Neuroweb TRAC wrapper pallet to reconcile the existing XC20 TRAC used for utility and the cannonical PAH TRAC at 1 to 1 parity. The wrapper pallet will effectively lock/unlock PAH TRAC on one side and mint/burn XC20 TRAC on the Neuroweb side, to be used for DKG utility (it just transforms the Snowbridge output token into an equal number of TRAC on NeuroWeb and vice versa). Introducing the TRAC wrapper pallet will further enhance the security of the entire system as the TRAC wrapper pallet, which is governed by the robust NeuroWeb Governance and secured by Polkadot, willhave minting and burning privileges over the XC20 TRAC asset (currently in control by OriginTrail Core Developers for Teleport purposes).
 
-**For Scenario 2**, the approach only involves Snowbridge and Polkadot Asset Hub, removing any dependency on Neuroweb and the TRAC wrapper pallet. This will allow for the use of TRAC on other Polkadot parachains, such as Hydration, without the need to bridge TRAC to Neuroweb and without adding any additional technical complexity introduced by the TRAC wrapper pallet. This means that the **TRAC token on Polkadot Asset Hub will become the cannonical TRAC token for the Polkadot ecosystem**, making integration wtih any other Polkadot parachain "standardized", without any customizations required and dependency on Neuroweb.
+**For use case 2**, the approach only involves Snowbridge and Polkadot Asset Hub, removing any dependency on Neuroweb and the TRAC wrapper pallet. This will allow for the use of TRAC on other Polkadot parachains, such as Hydration, without the need to bridge TRAC to Neuroweb and without adding any additional technical complexity introduced by the TRAC wrapper pallet. This means that the **TRAC token on Polkadot Asset Hub will become the cannonical TRAC token for the Polkadot ecosystem**, making integration wtih any other Polkadot parachain "standardized", without any customizations required and dependency on Neuroweb.
 
 
 
@@ -53,9 +53,9 @@ The key components of the system are Snowbridge, the Polkadot Asset Hub (PAH) an
 
 Based on the updated approach, a 2-phase rollout plan is proposed
 
-1. **Phase 1** will bring the initialization of cannonical TRAC for the Polkadot ecosystem, directly enabling Scenario 2 and trustless bridging of TRAC between Ethereum and Polkadot parachains (except Neuroweb). Phase 1 is expected to be completed by the end of June 2025.
+1. **Phase 1** will bring the initialization of cannonical TRAC for the Polkadot ecosystem, directly enabling use case 2 and trustless bridging of TRAC between Ethereum and Polkadot parachains (except Neuroweb). Phase 1 is expected to be completed by the end of June 2025.
 
-2. **Phase 2** will bring the TRAC wrapper pallet to the Neuroweb parachain, enabling Scenario 1 and the use of TRAC for DKG utility. During this phase the Teleport system will be deprecated. Before teleport deprecation, everyone will have a chance to teleport in any direction one more time through teleport. Should anyone be unwilling to use TRAC with Snowbridge as a successor to the Teleport system, they will have the option to “opt out” by teleporting back to Ethereum prior to completion of Phase 2. Phase 2 is expected to be completed by the end of July 2025.
+2. **Phase 2** will bring the TRAC wrapper pallet to the Neuroweb parachain, enabling use case 1 and the use of TRAC for DKG utility. During this phase the Teleport system will be deprecated. Before teleport deprecation, everyone will have a chance to teleport in any direction one more time through teleport. Should anyone be unwilling to use TRAC with Snowbridge as a successor to the Teleport system, they will have the option to “opt out” by teleporting back to Ethereum prior to completion of Phase 2. Phase 2 is expected to be completed by the end of July 2025.
 
 OriginTrail Core Developers and the Snowbridge team will collaborate closely on the rollout, initially verifying the integration on the NeuroWeb (Paseo) testnet. Exact timeline may be subject to change, depending on the dynamics of releasing the DKG V8.1 on the OriginTrail mainnet, and other ongoing activities. 
 
