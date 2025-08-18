@@ -22,7 +22,7 @@ Since the DKG V8 roadmap is currently in the Tuning phase, we propose the two ke
 
 1.1 Keep the network ask determination mechanism \- compute the network ask as the stake-weighted average of node "ask votes" within two sigma (unchanged)
 
-$$dkgNetworkPrice = \frac{\sum_{k=1}^{n} stake_k \cdot ask\_vote_k}{\sum_{k=1}^{n} stake_k}$$
+$$dkgNetworkPrice = \frac{\sum_{k=1}^{n} stake_k \cdot askVote_k}{\sum_{k=1}^{n} stake_k}$$
 
 Where:  
 - $stake_k$ = stake of node *k*  
@@ -30,7 +30,7 @@ Where:
 - $\sigma$ is the standard deviation of the current *dkgNetworkPrice*  
 - $n$ is the number of nodes that satisfy the condition:
 
-$$dkgNetworkPrice - \sigma < ask\_vote_i < dkgNetworkPrice + \sigma$$  
+$$dkgNetworkPrice - \sigma < askVote_k < dkgNetworkPrice + \sigma$$  
 
 1.2 Introduce a deviation penalty: any node ask that deviates from the network ask reduces that node’s power, lowering its reward potential
 
@@ -46,7 +46,7 @@ however with an updated *nodeAskFactor*:
 
 <br>
 
-$$nodeAskFactor = 1 - \left|\frac{ask\_vote - dkgNetworkPrice}{dkgNetworkPrice}\right|$$   
+$$nodeAskFactor = 1 - \left|\frac{askVote - dkgNetworkPrice}{dkgNetworkPrice}\right|$$   
 
 Meaning node ask\_vote deviation from the network price (both being higher and lower) will lower that node's ask factor, ultimately lowering its power in the network. (additional factors in the equation may apply and will be determined during the tuning process).  
 
