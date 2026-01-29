@@ -57,17 +57,17 @@ The current node scoring function is:
 
 The proposed scoring formula is:
 
-$$
-\text{nodeScore}(t) = 0.04 \cdot S(t) + 0.86 \cdot P(t) + 0.6 \cdot A(t) \cdot P(t)
-$$
+```math
+nodeScore(t) = 0.04 \cdot S(t) + 0.86 \cdot P(t) + 0.6 \cdot A(t) \cdot P(t)
+```
 
 Where the factors are defined in the following way:
 
 ### 4.1 Stake factor S(t)
 
-$$
-S(t) = \sqrt{\frac{\text{nodeStake}(t)}{\text{STAKE\_CAP}}}
-$$
+```math
+S(t) = \sqrt{\frac{nodeStake(t)}{STAKE\_CAP}}
+```
 
 * Uses **square root** scaling (sublinear): doubling stake no longer doubles score contribution.
 * Normalized by STAKE_CAP (to be set at 10M TRAC).
@@ -76,43 +76,43 @@ $$
 
 Let:
 
-- $n \in \mathcal{N}$ — A node in the network.
-- $e \in \mathcal{E}_t$ — An epoch within the evaluation window ending at epoch $t$.
-- $\mathcal{E}_t = \{t-3, t-2, t-1, t\}$ — The rolling window of the last **4 epochs**.
-- $K_{n,e}$ — The TRAC-denominated knowledge value published by node $n$ in epoch $e$.
+- **n ∈ N** — A node in the network.
+- **e ∈ E_t** — An epoch within the evaluation window ending at epoch **t**.
+- **E_t = {t-3, t-2, t-1, t}** — The rolling window of the last **4 epochs**.
+- **K_n,e** — The TRAC-denominated knowledge value published by node **n** in epoch **e**.
 
 #### Node-Level Published Knowledge Value
 
-The total knowledge value published by node $n$ over the evaluation window:
+The total knowledge value published by node **n** over the evaluation window:
 
-$$
-K_n^{(t)} = \sum_{e \in \mathcal{E}_t} K_{n,e}
-$$
+```math
+K_n^{(t)} = \sum_{e \in E_t} K_{n,e}
+```
 
 #### Network-Level Published Knowledge Value
 
 The total knowledge value published by all nodes over the same window:
 
-$$
-K_{\text{total}}^{(t)} = \sum_{e \in \mathcal{E}_t} \sum_{m \in \mathcal{N}} K_{m,e}
-$$
+```math
+K_{total}^{(t)} = \sum_{e \in E_t} \sum_{m \in N} K_{m,e}
+```
 
 #### Publishing Factor
 
-The publishing factor for node $n$ at epoch $t$ is defined as:
+The publishing factor for node **n** at epoch **t** is defined as:
 
-$$
-P_n(t) = \frac{K_n^{(t)}}{K_{\text{total}}^{(t)}} = \frac{\sum_{e \in \mathcal{E}_t} K_{n,e}}{\sum_{e \in \mathcal{E}_t} \sum_{m \in \mathcal{N}} K_{m,e}}
-$$
+```math
+P_n(t) = \frac{K_n^{(t)}}{K_{total}^{(t)}} = \frac{\sum_{e \in E_t} K_{n,e}}{\sum_{e \in E_t} \sum_{m \in N} K_{m,e}}
+```
 
-* $P(t)$ is the node's **share** of produced knowledge value, normalized by the total produced knowledge value across all nodes.
+* **P(t)** is the node's **share** of produced knowledge value, normalized by the total produced knowledge value across all nodes.
 * The proposal explicitly expands this to **current + 3 previous epochs** (rolling window) to capture sustained contribution rather than only the current epoch.
 
 ### 4.3 Network Ask alignment factor A(t)
 
-$$
-A(t) = 1 - \frac{|\text{askVote} - \text{dkgNetworkPrice}|}{\text{dkgNetworkPrice}}
-$$
+```math
+A(t) = 1 - \frac{|askVote - networkPrice|}{networkPrice}
+```
 
 * Rewards nodes whose ask is close to the network reference price (pricing discipline).
 * The absolute relative deviation ensures a symmetric penalty for being above or below the reference.
@@ -125,9 +125,17 @@ Details on the ask alignment factor and reasoning are explained in [OT-RFC-25](h
 ### 5.1 Why this reduces stake dominance
 
 
- **Old (quadratic)**:  $\left(\frac{\text{nodeStake}(t)}{STAKE\_CAP}\right)^2$ 
+**Old (quadratic):**
 
-**New (sublinear)** : $S(t) = \sqrt{\frac{\text{nodeStake}(t)}{\text{STAKE\_CAP}}}$
+```math
+\left(\frac{nodeStake(t)}{STAKE\_CAP}\right)^2
+```
+
+**New (sublinear):**
+
+```math
+S(t) = \sqrt{\frac{nodeStake(t)}{STAKE\_CAP}}
+```
 
 This compresses the advantage of extremely high stake and makes the system more compatible with eventually removing the cap.
 
@@ -183,7 +191,7 @@ This demonstrates how the legacy quadratic stake term heavily skews rewards towa
 
 ### New Formula Results
 
-Using the formula: $\text{nodeScore}(t) = 0.04 \cdot S(t) + 0.86 \cdot P(t) + 0.6 \cdot A(t) \cdot P(t)$
+Using the formula: `nodeScore(t) = 0.04 × S(t) + 0.86 × P(t) + 0.6 × A(t) × P(t)`
 
 | Stake | S(t)   | Node Score |
 | ----- | ------ | ---------- |
