@@ -1,4 +1,4 @@
-# RFC: Stake-Adjusted, Multi-Epoch Node Score Formula for DKG Rewards
+# OT-RFC-26: Stake-Adjusted, Multi-Epoch Node Score Formula for DKG Rewards
 
 **Status:** Draft (Request for Comments)
 
