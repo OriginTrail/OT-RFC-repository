@@ -250,6 +250,38 @@ This directly illustrates how the new model realigns incentives with long-term n
 * Reduces the risk that the 10M cap increase (and future cap removal) turns rewards into a near-pure stake competition.
 
 
+## UPDATE: Anti-Sybil Multiplicative Score Formula
+
+**Date:** February 2026
+
+Following the initial deployment of the RFC-26 formula and analysis of its behavior in production, the scoring formula has been updated from an **additive** to a **multiplicative** structure:
+
+**Previous (additive):**
+
+```math
+nodeScore(t) = 0.04 \cdot S(t) + 0.86 \cdot P(t) + 0.6 \cdot A(t) \cdot P(t)
+```
+
+**Updated (multiplicative):**
+
+```math
+nodeScore(t) = S(t) \cdot \left( c + 0.86 \cdot P(t) + 0.60 \cdot A(t) \cdot P(t) \right)
+```
+
+Where \( c = 0.002 \) is a small baseline coefficient (the **stake baseline coefficient**).
+
+### Rationale
+
+The original additive formula had a structural weakness: because the publishing and ask-alignment terms (`0.86 * P(t)` and `0.6 * A(t) * P(t)`) were independent of stake, a sybil attacker could split a single node's publishing activity across multiple low-stake identities and extract a disproportionate share of rewards. Stake served as a floor (`0.04 * S(t)`) rather than a gate, meaning the majority of a publishing node's score was achievable without meaningful stake commitment.
+
+The multiplicative structure addresses this by making **stake a multiplier over the entire score**. A node with zero stake receives zero score regardless of publishing activity, and splitting stake across N sybil identities now divides each identity's score by \( \sqrt{N} \) (due to the sublinear sqrt scaling), making sybil extraction economically unattractive.
+
+The small baseline coefficient \( c = 0.002 \) preserves a minimal incentive for staked non-publishers, preventing a hard cliff at zero publishing while keeping the sybil-resistant property intact. A staked node that does not publish receives a score of \( S(t) \cdot 0.002 \) — present but negligible compared to active publishers.
+
+All other components of the formula (sublinear stake scaling via sqrt, 4-epoch rolling publishing window, ask alignment factor) remain unchanged from the original RFC-26 specification.
+
+---
+
 ## 9. Conclusion & Call for Feedback
 
 This RFC proposes a significant improvement of the DKG node scoring formula,  designed to support the network's growth while preserving the core principle that **value creation should drive rewards**.
