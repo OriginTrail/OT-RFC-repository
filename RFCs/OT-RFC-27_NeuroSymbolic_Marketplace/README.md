@@ -151,48 +151,121 @@ The contract directly rejects objective faults such as invalid signatures, the w
 
 This still leaves delivery and quality outside the contract's proof. A formally valid receipt can become a claim even if the buyer says the result never arrived, and the contract cannot cheaply decide whether an AI answer was useful. Buyers manage that remaining risk by choosing attributable Core Nodes, keeping local observations, and immediately routing away from unreliable sellers.
 
-## How seller nodes earn rewards
+## From the current DKG formula to marketplace rewards
 
-Publishing fees and subscription payments fill separate reward pools. Valid DKG write proofs build the existing stake-weighted `WriteScore`. For query and inference, let $R_i$ be Core Node $i$'s total finalized receipt value after authorization checks, the buyer's funded cap, and any pro-rata adjustment:
+Publishing fees and subscription payments fill separate reward pools. The marketplace extension starts from the DKG write formula currently documented in [OT-RFC-26](../OT-RFC-26_Stake_Adjusted_Multi_Epoch_Node_Score_Formula/README.md), rather than treating `WriteScore` as an undefined input.
+
+### Current DKG WriteScore
+
+For Core Node $i$ at valid proof time $t_p$, the current DKG formula is:
 
 ```math
-R_i
-= \sum_{b \in i}
-\mathrm{QueryInferenceReceiptValue}_b
+\operatorname{NodeScore}_i(t_p)
+= S_i(t_p)\left(
+    c
+    + 0.86P_i(t_p)
+    + 0.60A_i(t_p)P_i(t_p)
+  \right)
 ```
 
-The same finalized value also builds stake-weighted `QueryInferenceScore` using the stake captured when each batch is accepted:
+where:
 
 ```math
-\mathrm{QueryInferenceScore}_i
-\mathrel{+}=
-S_i(t_{\mathrm{batch}})\,
-\mathrm{QueryInferenceReceiptValue}_{\mathrm{batch}}
+\begin{aligned}
+S_i(t)
+  &= \sqrt{\dfrac{\operatorname{EffectiveStake}_i(t)}{\mathrm{STAKE\_CAP}}} \\
+P_i(t)
+  &= \dfrac{\sum_{e \in E_t}K_{i,e}}
+           {\sum_j\sum_{e \in E_t}K_{j,e}} \\
+A_i(t)
+  &= 1-\dfrac{\left|\operatorname{AskVote}_i(t)-\operatorname{NetworkPrice}(t)\right|}
+                 {\operatorname{NetworkPrice}(t)} \\
+c
+  &= 0.002.
+\end{aligned}
 ```
 
-QIF blends the node's normalized receipt-value share with its normalized stake-weighted score. The protocol parameter $\lambda_{\mathrm{QIF}} \in [0,1]$ determines the relative influence of stake:
+Here, $S_i$ is the capped, square-root effective-stake factor, $P_i$ is the node's share of published knowledge value over the rolling multi-epoch window $E_t$, $A_i$ is alignment with the network publishing ask, and $c$ is the existing stake-baseline coefficient.
+
+For clarity, define the expression inside the parentheses as `WriteSignal`:
 
 ```math
-\mathrm{QIF}_i
+\operatorname{WriteSignal}_i(t_p)
+= c
+  + 0.86P_i(t_p)
+  + 0.60A_i(t_p)P_i(t_p)
+```
+
+The current `NodeScore` produced by each valid proof is therefore the increment added to the node's accumulated `WriteScore`:
+
+```math
+\begin{aligned}
+\Delta\operatorname{WriteScore}_i(p)
+  &= S_i(t_p)\operatorname{WriteSignal}_i(t_p) \\
+\operatorname{WriteScore}_i(e)
+  &= \sum_{p \in \operatorname{ValidProofs}_i(e)}
+     \Delta\operatorname{WriteScore}_i(p).
+\end{aligned}
+```
+
+The write-funded part of the node reward remains unchanged:
+
+```math
+G_i^{\mathrm{write}}(e)
+= B_{\mathrm{write}}(e)
+  \dfrac{\operatorname{WriteScore}_i(e)}
+        {\sum_j \operatorname{WriteScore}_j(e)}
+```
+
+### Query/inference extension
+
+For query and inference, let $R_i(e)$ be Core Node $i$'s total finalized receipt value after authorization checks, the buyer's funded cap, and any pro-rata adjustment:
+
+```math
+R_i(e)
+= \sum_{b \in \operatorname{AcceptedBatches}_i(e)}
+  \operatorname{QueryInferenceReceiptValue}_{i,b}
+```
+
+The same finalized receipt value builds `QueryInferenceScore` using the effective-stake factor captured when each batch is accepted:
+
+```math
+\operatorname{QueryInferenceScore}_i(e)
+= \sum_{b \in \operatorname{AcceptedBatches}_i(e)}
+  S_i(t_b)\,
+  \operatorname{QueryInferenceReceiptValue}_{i,b}
+```
+
+QIF then blends the node's normalized receipt-value share with its normalized stake-weighted receipt-value share. The protocol parameter $\lambda_{\mathrm{QIF}} \in [0,1]$ controls the relative influence of stake:
+
+```math
+\mathrm{QIF}_i(e)
 = (1-\lambda_{\mathrm{QIF}})
-  \dfrac{R_i}{\sum_j R_j}
+  \dfrac{R_i(e)}{\sum_j R_j(e)}
 + \lambda_{\mathrm{QIF}}
-  \dfrac{\mathrm{QueryInferenceScore}_i}
-        {\sum_j \mathrm{QueryInferenceScore}_j}
+  \dfrac{\operatorname{QueryInferenceScore}_i(e)}
+        {\sum_j \operatorname{QueryInferenceScore}_j(e)}
 ```
 
-At one endpoint, distribution follows finalized receipt value alone; at the other, it follows fully stake-weighted receipt value. This proposal does not prescribe a value for $\lambda_{\mathrm{QIF}}$; it is a protocol parameter to be calibrated through economic simulation, testnet observation, and community review. The write side remains on its existing `WriteScore` construction rather than inheriting this new parameter.
+At one endpoint, query/inference distribution follows finalized receipt value alone; at the other, it follows fully stake-weighted receipt value. This RFC does not prescribe a value for $\lambda_{\mathrm{QIF}}$; it is to be calibrated through economic simulation, testnet observation, and community review. The existing write formula remains unchanged.
 
-Let $B_{\mathrm{write}}$ be the publishing-funded pool and $B_{\mathrm{queryInference}}$ be the subscription-funded pool, including unused allowance, reserve, top-ups, and upgrades. Each pool is normalized separately in one payout:
+### Expanded node reward
+
+Let $B_{\mathrm{write}}$ be the publishing-funded pool and $B_{\mathrm{queryInference}}$ be the subscription-funded pool, including unused allowance, reserve, top-ups, and upgrades. The marketplace expands the current node reward with a second, source-separated term:
 
 ```math
-\mathrm{NodeReward}_i
-= B_{\mathrm{write}}
-  \dfrac{\mathrm{WriteScore}_i}
-        {\sum_j \mathrm{WriteScore}_j}
-+ B_{\mathrm{queryInference}}
-  \mathrm{QIF}_i
+\operatorname{NodeReward}_i(e)
+= B_{\mathrm{write}}(e)
+  \dfrac{\operatorname{WriteScore}_i(e)}
+        {\sum_j \operatorname{WriteScore}_j(e)}
++ B_{\mathrm{queryInference}}(e)
+  \mathrm{QIF}_i(e)
 ```
+
+| Reward source | Activity input | Stake-aware accumulator | Normalized distribution |
+| --- | --- | --- | --- |
+| Publishing | `WriteSignal` from valid proofs | `WriteScore` | `WriteScore` share |
+| Query/inference | Finalized receipt value $R_i$ | `QueryInferenceScore` | Parameterized QIF blend |
 
 Both pools are fully distributed, but QIF cannot claim write-funded value. Every subscription token enters the query/inference pool whether or not the buyer consumes its full allowance; a funded period with no finalized receipt value rolls forward to the next active period. Because QIF is a network reward factor rather than reimbursement, a seller can receive more or less than its own receipt value, with the stake-related difference controlled by $\lambda_{\mathrm{QIF}}$.
 
