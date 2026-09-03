@@ -160,7 +160,7 @@ Publishing fees and subscription payments fill separate reward pools. The market
 For Core Node $i$ at valid proof time $t_p$, the current DKG formula is:
 
 ```math
-\operatorname{NodeScore}_i(t_p)
+\mathrm{NodeScore}_i(t_p)
 = S_i(t_p)\left(
     c
     + 0.86P_i(t_p)
@@ -173,13 +173,13 @@ where:
 ```math
 \begin{aligned}
 S_i(t)
-  &= \sqrt{\dfrac{\operatorname{EffectiveStake}_i(t)}{\mathrm{STAKE\_CAP}}} \\
+  &= \sqrt{\dfrac{\mathrm{EffectiveStake}_i(t)}{\mathrm{STAKE\_CAP}}} \\
 P_i(t)
   &= \dfrac{\sum_{e \in E_t}K_{i,e}}
            {\sum_j\sum_{e \in E_t}K_{j,e}} \\
 A_i(t)
-  &= 1-\dfrac{\left|\operatorname{AskVote}_i(t)-\operatorname{NetworkPrice}(t)\right|}
-                 {\operatorname{NetworkPrice}(t)} \\
+  &= 1-\dfrac{\left|\mathrm{AskVote}_i(t)-\mathrm{NetworkPrice}(t)\right|}
+                 {\mathrm{NetworkPrice}(t)} \\
 c
   &= 0.002.
 \end{aligned}
@@ -190,7 +190,7 @@ Here, $S_i$ is the capped, square-root effective-stake factor, $P_i$ is the node
 For clarity, define the expression inside the parentheses as `WriteSignal`:
 
 ```math
-\operatorname{WriteSignal}_i(t_p)
+\mathrm{WriteSignal}_i(t_p)
 = c
   + 0.86P_i(t_p)
   + 0.60A_i(t_p)P_i(t_p)
@@ -200,11 +200,11 @@ The current `NodeScore` produced by each valid proof is therefore the increment 
 
 ```math
 \begin{aligned}
-\Delta\operatorname{WriteScore}_i(p)
-  &= S_i(t_p)\operatorname{WriteSignal}_i(t_p) \\
-\operatorname{WriteScore}_i(e)
-  &= \sum_{p \in \operatorname{ValidProofs}_i(e)}
-     \Delta\operatorname{WriteScore}_i(p).
+\Delta\mathrm{WriteScore}_i(p)
+  &= S_i(t_p)\mathrm{WriteSignal}_i(t_p) \\
+\mathrm{WriteScore}_i(e)
+  &= \sum_{p \in \mathrm{ValidProofs}_i(e)}
+     \Delta\mathrm{WriteScore}_i(p).
 \end{aligned}
 ```
 
@@ -213,8 +213,8 @@ The write-funded part of the node reward remains unchanged:
 ```math
 G_i^{\mathrm{write}}(e)
 = B_{\mathrm{write}}(e)
-  \dfrac{\operatorname{WriteScore}_i(e)}
-        {\sum_j \operatorname{WriteScore}_j(e)}
+  \dfrac{\mathrm{WriteScore}_i(e)}
+        {\sum_j \mathrm{WriteScore}_j(e)}
 ```
 
 ### Query/inference extension
@@ -223,17 +223,17 @@ For query and inference, let $R_i(e)$ be Core Node $i$'s total finalized receipt
 
 ```math
 R_i(e)
-= \sum_{b \in \operatorname{AcceptedBatches}_i(e)}
-  \operatorname{QueryInferenceReceiptValue}_{i,b}
+= \sum_{b \in \mathrm{AcceptedBatches}_i(e)}
+  \mathrm{QueryInferenceReceiptValue}_{i,b}
 ```
 
 The same finalized receipt value builds `QueryInferenceScore` using the effective-stake factor captured when each batch is accepted:
 
 ```math
-\operatorname{QueryInferenceScore}_i(e)
-= \sum_{b \in \operatorname{AcceptedBatches}_i(e)}
+\mathrm{QueryInferenceScore}_i(e)
+= \sum_{b \in \mathrm{AcceptedBatches}_i(e)}
   S_i(t_b)\,
-  \operatorname{QueryInferenceReceiptValue}_{i,b}
+  \mathrm{QueryInferenceReceiptValue}_{i,b}
 ```
 
 QIF then blends the node's normalized receipt-value share with its normalized stake-weighted receipt-value share. The protocol parameter $\lambda_{\mathrm{QIF}} \in [0,1]$ controls the relative influence of stake:
@@ -243,8 +243,8 @@ QIF then blends the node's normalized receipt-value share with its normalized st
 = (1-\lambda_{\mathrm{QIF}})
   \dfrac{R_i(e)}{\sum_j R_j(e)}
 + \lambda_{\mathrm{QIF}}
-  \dfrac{\operatorname{QueryInferenceScore}_i(e)}
-        {\sum_j \operatorname{QueryInferenceScore}_j(e)}
+  \dfrac{\mathrm{QueryInferenceScore}_i(e)}
+        {\sum_j \mathrm{QueryInferenceScore}_j(e)}
 ```
 
 At one endpoint, query/inference distribution follows finalized receipt value alone; at the other, it follows fully stake-weighted receipt value. This RFC does not prescribe a value for $\lambda_{\mathrm{QIF}}$; it is to be calibrated through economic simulation, testnet observation, and community review. The existing write formula remains unchanged.
@@ -254,10 +254,10 @@ At one endpoint, query/inference distribution follows finalized receipt value al
 Let $B_{\mathrm{write}}$ be the publishing-funded pool and $B_{\mathrm{queryInference}}$ be the subscription-funded pool, including unused allowance, reserve, top-ups, and upgrades. The marketplace expands the current node reward with a second, source-separated term:
 
 ```math
-\operatorname{NodeReward}_i(e)
+\mathrm{NodeReward}_i(e)
 = B_{\mathrm{write}}(e)
-  \dfrac{\operatorname{WriteScore}_i(e)}
-        {\sum_j \operatorname{WriteScore}_j(e)}
+  \dfrac{\mathrm{WriteScore}_i(e)}
+        {\sum_j \mathrm{WriteScore}_j(e)}
 + B_{\mathrm{queryInference}}(e)
   \mathrm{QIF}_i(e)
 ```
