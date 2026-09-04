@@ -295,3 +295,7 @@ Higher-cost services may therefore need a higher unit ask, operator fee, volume,
 For buyers on Core or Edge Nodes, this is one plan, one node endpoint, scoped keys, and one meter across many graph and AI sellers. For Core Node operators, it turns seller-signed, buyer-authorized service activity and attracted stake into a share of gross node rewards and therefore operator-fee revenue, while delegators share the remainder. For the network, it connects publishing, querying, reasoning, graph ML, and inference without a blockchain transaction for every interaction.
 
 The technical data structures, Core and Edge Node roles, CA assignment, subscription and metering rules, direct receipt-batch validation, cross-seller over-authorization controls, transport envelopes, reward bounds, rollout gates, and complete sequence diagrams are works in progress that will be refined through further design, implementation, testing, and community review.
+
+## Feedback collection point
+
+Please provide comments to the RFC on this Github issue: https://github.com/OriginTrail/OT-RFC-repository/issues/64
