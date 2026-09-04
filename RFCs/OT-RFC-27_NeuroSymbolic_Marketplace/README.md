@@ -18,7 +18,7 @@ The foundational question is:
 
 The proposed value flow is simple: subscription TRAC fills the query/inference reward pool; buyer-authorized and seller-claimed activity is validated and capped to funding; finalized `QueryInferenceReceiptValue` contributes directly to one distribution share and, combined with stake, to `QueryInferenceScore`; and QIF blends those two shares before the node's configured operator fee and normal delegator distribution allocate each reward.
 
-A working prototype, summarized below, has already demonstrated this exchange end to end on Base mainnet, with separately operated DKG peer nodes settling real TRAC for query and inference. The question this RFC turns on is therefore not whether TRAC can pay for these services on the DKG—the prototype shows that it can—but which settlement model does so best.
+A working prototype, summarized below, has already demonstrated this exchange end-to-end on Base mainnet, with separately operated DKG peer nodes settling real TRAC for query and inference. The question this RFC turns on is therefore not whether TRAC can pay for these services on the DKG—the prototype shows that it can—but which settlement model does so best.
 
 The precedent is publishing: TRAC demand for a network service is recognized by the protocol and flows to the nodes that supply it. This proposal applies that principle—not publishing's per-transaction mechanism—to query and inference through a separate subscription-funded reward pool, leaving the community to compare pooled, stake-weighted settlement with other possible models.
 
